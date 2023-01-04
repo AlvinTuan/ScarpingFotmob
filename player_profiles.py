@@ -11,7 +11,7 @@ url_file_driver = os.path.join("etc", "chromedriver.exe") # từ thư mục hi�
 driver = webdriver.Chrome(executable_path=url_file_driver)
 
 
-URL_for_match = "https://www.fotmob.com/match/3901098/matchfacts/player-match-card/952029"
+URL_for_match = "https://www.fotmob.com/match/3901098/matchfacts/player-match-card/796974"
 driver.get(URL_for_match)
 page_source = BeautifulSoup(driver.page_source, "html.parser")
 # name_home_div = page_source.find("div", "css-1f66mx0-TeamMarkup e3q4wbq5")
@@ -25,5 +25,45 @@ for ip in info_player:
     name_info = info_i[0].get_text().strip()
     value_info = info_i[1].get_text().strip()
     print(f"{name_info}: {value_info}")
+
+position_player = info_player[0].find_all("span")
+if (position_player[1].get_text().strip() == "GK"):
+    ul_dict = tag_profile_player.find("ul", "css-1szro0h-StatSection e1fnykti12")
+    li_list = ul_dict.find_all("li")
+    hearder = li_list[0].get_text().strip()
+    print(hearder)
+    fotmob_rating = li_list[1].find("span").get_text().strip()
+    fotmob_rating_value = li_list[1].find("div").find("span").get_text().strip()
+    print(fotmob_rating, fotmob_rating_value)
+    for entry in li_list[2:]:
+        criteria_span_list = entry.find_all("span")
+        evaluation_criteria = criteria_span_list[0].get_text().strip()
+        value_ec = criteria_span_list[1].get_text().strip()
+        print(evaluation_criteria, value_ec)
+else:
+    ul_dict = tag_profile_player.find_all("ul", "css-1szro0h-StatSection e1fnykti12")[0]
+    li_list = ul_dict.find_all("li")
+    hearder = li_list[0].get_text().strip()
+    print(hearder)
+    fotmob_rating = li_list[1].find("span").get_text().strip()
+    fotmob_rating_value = li_list[1].find("div").find("span").get_text().strip()
+    print(fotmob_rating, fotmob_rating_value)
+    for entry in li_list[2:]:
+        criteria_span_list = entry.find_all("span")
+        evaluation_criteria = criteria_span_list[0].get_text().strip()
+        value_ec = criteria_span_list[1].get_text().strip()
+        print(evaluation_criteria, value_ec)
+    # ul_attack
+    ul_attack = tag_profile_player.find_all("ul", "css-1szro0h-StatSection e1fnykti12")[1]
+    li_attack = ul_dict.find_all("li")
+    hearder = li_list[0].get_text().strip()
+    print(hearder)
+    for entry in li_attack[1:]:
+        criteria_span_list = entry.find_all("span")
+        evaluation_criteria = criteria_span_list[0].get_text().strip()
+        value_ec = criteria_span_list[1].get_text().strip()
+        print(evaluation_criteria, value_ec)
+
+
 print(name_player)
 # print(info_player)

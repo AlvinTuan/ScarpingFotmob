@@ -54,11 +54,7 @@ def get_criteria_of_home_away(stat_li_list):
 
 if __name__ == "__main__":
     round_number = input("Enter round: ")
-    if not (os.path.isdir(f'./data/Round-{round_number}/')):
-        mkdir_folder = os.mkdir(f'./data/Round-{round_number}/')
-    else:
-        print("Folder exist")
-        os._exit(0)
+    
 
     data_save_file_csv = [] # để 1 biến này chứa data lưu vào 
     url_file_driver = os.path.join("etc", "chromedriver.exe") # từ thư mục hiện tại. nối với thư mục etc và lấy file chomedriver nhé

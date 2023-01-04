@@ -1,10 +1,3 @@
-"""
-file code
-etc để lưu driver chrome
-data để lưu data lúc crawl về được.
-"""
-
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -104,7 +97,7 @@ if __name__ == "__main__":
     
     # print(name_folder_number)
     # print(name_match)
-    with open(os.path.join(name_folder_number, name_file_output), "w+", newline="", encoding="utf-8") as file_output:
+    with open(os.path.join("testFiles", name_file_output), "w+", newline="", encoding="utf-8") as file_output:
         headers = ["Evaluation criteria", "Home", "Away"]
         writer = csv.DictWriter(file_output, delimiter=',',lineterminator="\n", fieldnames=headers)
         writer.writeheader()

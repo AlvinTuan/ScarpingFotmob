@@ -2,13 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from bs4 import BeautifulSoup
-from datetime import datetime # lấy time lưu file
 import os, time # time.sleep() và os để nói đường dẫn
 import csv
 
 
-def data_gga_to_CSV(name_league, date_time):
-    with open(os.path.join(f"data/{name_league}/", f"g-and-ga-{name_league}-{date_time}.csv"), "w+", newline="", encoding="utf-8") as file_output:
+def data_gga_to_CSV(name_league):
+    with open(os.path.join(f"data/{name_league}/", f"g-and-ga-{name_league}.csv"), "w+", newline="", encoding="utf-8") as file_output:
         headers = ["Team", "G", "GA"]
         writer = csv.DictWriter(file_output, delimiter=',',lineterminator="\n", fieldnames=headers)
         writer.writeheader()
@@ -19,8 +18,8 @@ def data_gga_to_CSV(name_league, date_time):
             goals_againist = entry[2]
             writer.writerow({headers[0]:team_name, headers[1]:goals_for, headers[2]:goals_againist})
 
-def data_xgxga_to_CSV(name_league, date_time):
-    with open(os.path.join(f"data/{name_league}/", f"xg-and-xga-{name_league}-{date_time}.csv"), "w+", newline="", encoding="utf-8") as file_output:
+def data_xgxga_to_CSV(name_league):
+    with open(os.path.join(f"data/{name_league}/", f"xg-and-xga-{name_league}.csv"), "w+", newline="", encoding="utf-8") as file_output:
         headers = ["Team", "xG", "xGA"]
         writer = csv.DictWriter(file_output, delimiter=',',lineterminator="\n", fieldnames=headers)
         writer.writeheader()
@@ -38,8 +37,6 @@ if __name__ == "__main__":
     url_file_driver = os.path.join("etc", "chromedriver.exe")
     driver = webdriver.Chrome(executable_path=url_file_driver)
 
-    now = datetime.now()
-    date_time = now.strftime("%d%m%Y_%H%M%S")
 
     for league in NAME_LEAGUES:
         driver.get(f"https://understat.com/league/{league}/2022")
@@ -61,8 +58,8 @@ if __name__ == "__main__":
             xga = xga_value[:5]
             mem_g_ga.append([team,g,ga])
             mem_xg_xga.append([team,xg,xga])
-        data_gga_to_CSV(league, date_time)
-        data_xgxga_to_CSV(league, date_time)
+        data_gga_to_CSV(league)
+        data_xgxga_to_CSV(league)
 
 time.sleep(3)
 driver.close()

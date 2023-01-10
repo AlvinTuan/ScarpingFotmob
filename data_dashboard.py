@@ -71,6 +71,6 @@ for league in NAME_LEAGUES:
     # plt.show()
 
     ## Save plot
-    plt.savefig(f'E:\\nhom13_ds\\data\\images-xGchart\\xGChart{league}-{now}.png', dpi=1200, bbox_inches = "tight")
+    plt.savefig(f'data\\images-xGchart\\xGChart{league}-{now}.png', dpi=1200, bbox_inches = "tight")
 
 dbConnection.close()

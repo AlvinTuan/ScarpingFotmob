@@ -1,7 +1,8 @@
-pip install SQLAlchemy==1.4.42
+pip install sqlalchemy==1.4.42
 pip install pandas==1.5.2
 pip install matplotlib==3.6.2
 pip install mysql-connector==2.2.9
 pip install selenium==4.6.0
 pip install beautifulsoup4==4.11.1
 pip install python-csv==0.0.10
+pip install schedule

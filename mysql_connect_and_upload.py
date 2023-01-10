@@ -17,7 +17,7 @@ NAME_LEAGUES = ["EPL", "La_liga", "Bundesliga" , "Serie_A", "Ligue_1"]
 
 for league in NAME_LEAGUES:
 
-    lg = pd.read_csv(f'data/{league}/g-and-ga-{league}.csv', index_col = False, delimiter=',')
+    lg = pd.read_csv(f'data/{league}/xg-and-xga-{league}.csv', index_col = False, delimiter=',')
     # league.head()
 
     try:
@@ -31,14 +31,14 @@ for league in NAME_LEAGUES:
             cursor.execute(f'DROP TABLE IF EXISTS {league};')
             #creating the tables
             print(f'Creating the tables {league}')
-            cursor.execute(f"CREATE TABLE  {league} (Team varchar(255) NOT NULL, G int NOT NULL, GA int NOT NULL);")
+            cursor.execute(f"CREATE TABLE  {league} (Team varchar(255) NOT NULL, xG float NOT NULL, xGA float NOT NULL);")
             print(f"Table {league} is created")
 
             #insert data
             for i,row in lg.iterrows():
                 sql = f"INSERT INTO leagues.{league} VALUES (%s, %s, %s) "
                 cursor.execute(sql, tuple(row))
-                print('{i+1} -Data inserted')
+                print(f'{i+1} -Data inserted')
                 # the connection is not auto committed by default, so we must commit to save our changes
                 connector.commit()
                 

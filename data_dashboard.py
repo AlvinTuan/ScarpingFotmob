@@ -20,22 +20,7 @@ for league in NAME_LEAGUES:
 
     pd.set_option('display.expand_frame_repr', False)
 
-    # print(epl)
     df['path'] = df['Team'] + '.png'
-    # df.head()
-
-    # fig, ax = plt.subplots(figsize=(6, 4), dpi=120)
-    # ax.scatter(df['G'], df['GA'])
-
-    # fig, ax = plt.subplots(figsize=(6, 4), dpi=120)
-    # ax.scatter(df['G'], df['GA'], color='white')
-
-    # def getImage(path):
-    #     return OffsetImage(plt.imread('images/' + path), zoom=.5, alpha = 1)
-
-    # for index, row in df.iterrows():
-    #     ab = AnnotationBbox(getImage(row['path']), (row['G'], row['GA']), frameon=False)
-    #     ax.add_artist(ab)
 
     # Set font and background colour
     plt.rcParams.update({'font.family':'Arial'})
@@ -45,7 +30,7 @@ for league in NAME_LEAGUES:
     fig, ax = plt.subplots(figsize=(6, 4), dpi=120)
     fig.set_facecolor(bgcol)
     ax.set_facecolor(bgcol)
-    ax.scatter(df['G'], df['GA'], c=bgcol)
+    ax.scatter(df['xG'], df['xGA'], c=bgcol)
 
     # Change plot spines
     ax.spines['right'].set_visible(False)
@@ -62,30 +47,30 @@ for league in NAME_LEAGUES:
         return OffsetImage(plt.imread('images/' + path), zoom=.5, alpha = 1)
 
     for index, row in df.iterrows():
-        ab = AnnotationBbox(getImage(row['path']), (row['G'], row['GA']), frameon=False)
+        ab = AnnotationBbox(getImage(row['path']), (row['xG'], row['xGA']), frameon=False)
         ax.add_artist(ab)
 
     # Add average lines
-    plt.hlines(df['GA'].mean(), df['G'].min(), df['G'].max(), color='#c2c1c0')
-    plt.vlines(df['G'].mean(), df['GA'].min(), df['GA'].max(), color='#c2c1c0')
+    plt.hlines(df['xGA'].mean(), df['xG'].min(), df['xG'].max(), color='#c2c1c0')
+    plt.vlines(df['xG'].mean(), df['xGA'].min(), df['xGA'].max(), color='#c2c1c0')
 
     # Text
 
     ## Title & comment
-    fig.text(.15,.98,'G Performance',size=20)
+    fig.text(.15,.98,'xG Performance',size=20)
     fig.text(.15,.93,'Turns out some teams good, others bad', size=12)
 
     ## Avg line explanation
-    fig.text(.06,.14,'G Against', size=9, color='#575654',rotation=90)
-    fig.text(.12,0.05,'G For', size=9, color='#575654')
+    fig.text(.06,.14,'xG Against', size=9, color='#575654',rotation=90)
+    fig.text(.12,0.05,'xG For', size=9, color='#575654')
 
     ## Axes titles
-    fig.text(.76,.535,'Avg. G Against', size=6, color='#c2c1c0')
-    fig.text(.325,.17,'Avg. G For', size=6, color='#c2c1c0',rotation=90)
+    fig.text(.76,.535,'Avg. xG Against', size=6, color='#c2c1c0')
+    fig.text(.325,.17,'Avg. xG For', size=6, color='#c2c1c0',rotation=90)
 
     # plt.show()
 
     ## Save plot
-    plt.savefig(f'E:\\nhom13_ds\\data\\images-Gchart\\GChart{league}-{now}.png', dpi=1200, bbox_inches = "tight")
+    plt.savefig(f'E:\\nhom13_ds\\data\\images-xGchart\\xGChart{league}-{now}.png', dpi=1200, bbox_inches = "tight")
 
 dbConnection.close()

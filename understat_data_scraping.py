@@ -42,6 +42,7 @@ if __name__ == "__main__":
             xga = xga_value[:5]
             mem_xg_xga.append([team,xg,xga])
         data_xgxga_to_CSV(league)
+    #clone
 
     driver.close()
 
